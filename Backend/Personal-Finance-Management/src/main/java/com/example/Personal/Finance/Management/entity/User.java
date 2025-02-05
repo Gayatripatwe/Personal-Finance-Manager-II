@@ -7,19 +7,28 @@ import jakarta.persistence.*;
 public class User {
 @Id
 @GeneratedValue
-private long use_id;
-
+private long user_id;
+@Column
+private String Name;
 @Column
     private String email  ;
 @Column
     private String password;
 
-    public long getUse_id() {
-        return use_id;
+    public String getName() {
+        return Name;
     }
 
-    public void setUse_id(long use_id) {
-        this.use_id = use_id;
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public long getUse_id() {
+        return user_id;
+    }
+
+    public void setUse_id(long user_id) {
+        this.user_id = user_id;
     }
 
     public String getEmail() {
@@ -38,10 +47,11 @@ private long use_id;
         this.password = password;
     }
 
-    public User(long use_id, String email, String password) {
-        this.use_id = use_id;
+    public User(long user_id,String  Name , String email, String password) {
+        this.user_id = user_id;
         this.email = email;
         this.password = password;
+        this.Name= Name;
     }
 
     public User() {
