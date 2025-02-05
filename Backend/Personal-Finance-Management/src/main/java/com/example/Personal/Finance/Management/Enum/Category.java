@@ -4,3 +4,4 @@ public enum Category {
     Need,
     Wants
 }
+// this is enum
