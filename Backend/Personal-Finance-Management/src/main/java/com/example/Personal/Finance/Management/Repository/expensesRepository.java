@@ -5,8 +5,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface expensesRepository extends JpaRepository<Expenses,Long> {
 
-
-
-
-
 }
