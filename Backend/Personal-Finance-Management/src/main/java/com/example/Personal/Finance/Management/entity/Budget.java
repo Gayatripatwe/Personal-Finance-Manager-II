@@ -3,6 +3,8 @@ package com.example.Personal.Finance.Management.entity;
 import com.example.Personal.Finance.Management.Enum.Category;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="Budget")
 public class Budget {
@@ -17,6 +19,27 @@ public class Budget {
     @Column
     @Enumerated(EnumType.STRING)
     private Category category;
+    @ManyToOne
+    @JoinColumn(name="income_id")
+    private Income income;
+    @OneToMany(mappedBy = "budget")
+    private List<Expenses> expenses;
+
+    public Income getIncome() {
+        return income;
+    }
+
+    public void setIncome(Income income) {
+        this.income = income;
+    }
+
+    public List<Expenses> getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(List<Expenses> expenses) {
+        this.expenses = expenses;
+    }
 
     public Long getId() {
         return id;
@@ -50,11 +73,12 @@ public class Budget {
         this.category = category;
     }
 
-    public Budget(Long id, double amount, User user, Category category) {
+    public Budget(Long id, double amount, User user, Category category,Income income) {
         this.id = id;
         this.amount = amount;
         this.user = user;
         this.category = category;
+        this.income=income;
     }
     public Budget() {
 

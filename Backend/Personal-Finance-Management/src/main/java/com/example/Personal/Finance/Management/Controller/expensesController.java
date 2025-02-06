@@ -2,7 +2,9 @@ package com.example.Personal.Finance.Management.Controller;
 
 import com.example.Personal.Finance.Management.Service.expensesService;
 import com.example.Personal.Finance.Management.entity.Expenses;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,11 +15,18 @@ public class expensesController {
     public expensesController(expensesService expenseService) {
         this.ExpenseService = expenseService;
     }
+
 //create expenses
     @PostMapping("/addexpenses")
     public ResponseEntity<Expenses> addExpenses(@RequestBody Expenses E){
-    Expenses savedexpense = ExpenseService .addExpenses(E).getBody();
-    return ResponseEntity.ok(savedexpense);
+   try {
+       Expenses savedexpense = ExpenseService.addExpenses(E).getBody();
+       return ResponseEntity.ok(savedexpense);
+   }
+   catch(Exception e){
+       Expenses errorExpense = new Expenses();                  // Optionally, you can set properties like error message here
+       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorExpense);
+   }
     }
 
     //get expense by id

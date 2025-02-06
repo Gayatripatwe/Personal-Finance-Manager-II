@@ -3,6 +3,7 @@ package com.example.Personal.Finance.Management.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name="Incomes")
@@ -19,6 +20,27 @@ public class Income {
     @ManyToOne()                            // Assuming 'user' is a reference to the User entity
     @JoinColumn(name = "user_id")
     private User user;
+    @OneToMany(mappedBy = "income")
+    private List<Budget> budgets;
+    @OneToMany
+    private List<SavingGoals> SavingGoals;
+
+
+    public List<SavingGoals> getSavingGoals() {
+        return SavingGoals;
+    }
+
+    public void setSavingGoals(List<SavingGoals> savingGoals) {
+        SavingGoals = savingGoals;
+    }
+
+    public List<Budget> getBudgets() {
+        return budgets;
+    }
+
+    public void setBudgets(List<Budget> budgets) {
+        this.budgets = budgets;
+    }
 
     public Long getId() {
         return id;
