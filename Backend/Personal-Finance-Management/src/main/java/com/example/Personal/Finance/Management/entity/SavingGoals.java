@@ -10,7 +10,7 @@ public class SavingGoals {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne()                            // Assuming 'user' is a reference to the User entity
+    @ManyToOne()
     @JoinColumn(name = "user_id")
     private User user;
     @Column
@@ -18,7 +18,7 @@ public class SavingGoals {
     @Column
     private Double TargetAmount;
     @Column
-    private Double Currentamount;
+    private Double currentAmount;
     @Column
     private LocalDate deadline;
 
@@ -54,12 +54,12 @@ public class SavingGoals {
         TargetAmount = targetAmount;
     }
 
-    public Double getCurrentamount() {
-        return Currentamount;
+    public Double getCurrentAmount() {
+        return currentAmount;
     }
 
-    public void setCurrentamount(Double currentamount) {
-        Currentamount = currentamount;
+    public void setCurrentAmount(Double currentAmount) {
+        this.currentAmount = currentAmount;
     }
 
     public LocalDate getDeadline() {
@@ -70,16 +70,17 @@ public class SavingGoals {
         this.deadline = deadline;
     }
 
-    public SavingGoals(Long id, User user, String goalName, Double targetAmount, Double currentamount, LocalDate deadline) {
+    public SavingGoals(Long id, User user, String goalName, Double targetAmount, Double currentAmount, LocalDate deadline) {
         this.id = id;
         this.user = user;
         GoalName = goalName;
         TargetAmount = targetAmount;
-        Currentamount = currentamount;
+        this.currentAmount = currentAmount;
         this.deadline = deadline;
     }
 
     public SavingGoals() {
 
     }
+
 }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 public interface expensesService {
      ResponseEntity<Expenses> addExpenses(Expenses E);
-ResponseEntity<Expenses> updateExpenses(Long id,Expenses updatedExp);
+     ResponseEntity<Expenses> updateExpenses(Long id,Expenses updatedExp);
      ResponseEntity<Void> deleteExpense(Long id);
      ResponseEntity<Expenses> getExpenseById(Long id);
 }
