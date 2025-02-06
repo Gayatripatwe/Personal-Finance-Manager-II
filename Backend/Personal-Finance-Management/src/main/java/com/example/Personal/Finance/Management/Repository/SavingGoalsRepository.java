@@ -6,5 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface SavingGoalsRepository extends JpaRepository<SavingGoals,Long> {
-    List<SavingGoals> findByUser_Id(Long userId);
+    List<SavingGoals> findByUser_UserId(Long userId);
+
 }

@@ -24,7 +24,7 @@ public class SavingGoalsServiceimpl implements SavingGoalsService {
     }
 
     public List<SavingGoals> getSavingGoalsByUserId(Long userId) {
-        return savingGoalsRepository.findByUser_Id(userId);
+        return savingGoalsRepository.findByUser_UserId(userId);
     }
 
     public SavingGoals createSavingGoal(SavingGoals savingGoals) {

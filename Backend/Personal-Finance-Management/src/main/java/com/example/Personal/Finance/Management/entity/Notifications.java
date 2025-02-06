@@ -10,7 +10,7 @@ public class Notifications {
     private  Long id;
     @Column
     private String MessageText;
-    @ManyToOne()                               // Assuming 'user' is a reference to the User entity
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
