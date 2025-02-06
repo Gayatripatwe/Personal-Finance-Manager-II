@@ -34,3 +34,4 @@ build/
 
 # Ignore application.properties
 Backend/Personal-Finance-Management/src/main/resources/application.properties
+src/main/resources/application.properties
