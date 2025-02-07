@@ -17,9 +17,12 @@ public class IncomeController {
         this.incomeService = incomeService;
     }
 
-    @PostMapping("/add/{userId}")
-    public ResponseEntity<Income> addIncome(@PathVariable Long userId, @RequestBody Income income) {
-        return ResponseEntity.ok(incomeService.addIncome(userId, income));
+    @PostMapping("/add")
+    public ResponseEntity<?> addIncome( @RequestBody Income income) {
+        if (income.getUser() == null || income.getUser().getUserid() == 0) {
+            return ResponseEntity.badRequest().body("User ID is required to add income!");
+        }
+        return ResponseEntity.ok(incomeService.addIncome(income));
     }
 
     @GetMapping("/all/{userId}")
@@ -31,4 +34,16 @@ public class IncomeController {
     public ResponseEntity<Double> getTotalIncome(@PathVariable Long userId) {
         return ResponseEntity.ok(incomeService.getTotalIncome(userId));
     }
+
+    @PutMapping("/update/{Id}")
+    public ResponseEntity<Income> updateIncome(@PathVariable Long Id, @RequestBody Income updatedIncome) {
+        return ResponseEntity.ok(incomeService.updateIncome(Id, updatedIncome));
+    }
+
+    @DeleteMapping("/delete/{Id}")
+    public ResponseEntity<String> deleteIncome(@PathVariable Long Id) {
+        incomeService.deleteIncome(Id);
+        return ResponseEntity.ok("Income deleted successfully!");
+    }
+
 }

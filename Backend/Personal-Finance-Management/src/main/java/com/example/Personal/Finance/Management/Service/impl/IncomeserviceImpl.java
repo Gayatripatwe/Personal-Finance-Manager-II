@@ -19,9 +19,12 @@ public class IncomeserviceImpl implements IncomeService {
         this.userRepository = userRepository;
     }
 
-    public Income addIncome(Long userId, Income income) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found!"));
+    public Income addIncome(Income income) {
+        if (income.getUser() == null || income.getUser().getUserid() == 0) {
+            throw new RuntimeException("User is required to add income!");
+        }
+        User user = userRepository.findById(income.getUser().getUserid())
+                .orElseThrow(() -> new RuntimeException("User not found!" + income.getUser().getUserid()));
 
         income.setUser(user);
         return incomeRepository.save(income);
@@ -29,15 +32,36 @@ public class IncomeserviceImpl implements IncomeService {
 
     public List<Income> getUserIncomes(Long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found!"));
+                .orElseThrow(() -> new RuntimeException("User not found!" + userId));
 
         return incomeRepository.findByUser(user);
     }
 
     public Double getTotalIncome(Long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found!"));
+                .orElseThrow(() -> new RuntimeException("User not found!" + userId));
 
         return incomeRepository.sumByUser(user).orElse(0.0);
+    }
+
+    @Override
+    public Income updateIncome(Long Id, Income updatedIncome) {
+        Income existingIncome = incomeRepository.findById(Id)
+                .orElseThrow(() -> new RuntimeException("Income not found with ID: " + Id));
+
+
+        existingIncome.setAmount(updatedIncome.getAmount());
+        existingIncome.setDescription(updatedIncome.getDescription());
+        existingIncome.setDate(updatedIncome.getDate());
+
+        return incomeRepository.save(existingIncome);
+    }
+
+    @Override
+    public void deleteIncome(Long Id) {
+        Income income = incomeRepository.findById(Id)
+                .orElseThrow(() -> new RuntimeException("Income not found with ID: " + Id));
+
+        incomeRepository.delete(income);
     }
 }
