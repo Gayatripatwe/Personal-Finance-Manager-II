@@ -2,6 +2,7 @@
 package com.example.Personal.Finance.Management.entity;
 
 import com.example.Personal.Finance.Management.Enum.Category;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class Budget {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
     private User user;
 
     @Enumerated(EnumType.STRING)
@@ -26,6 +28,7 @@ public class Budget {
 
     @ManyToOne
     @JoinColumn(name = "income_id", nullable = false)
+    @JsonBackReference
     private Income income;
 
     @OneToMany(mappedBy = "budget", cascade = CascadeType.ALL)
@@ -92,4 +95,21 @@ public class Budget {
     public void setExpenses(List<Expenses> expenses) {
         this.expenses = expenses;
     }
+
+
+    public void setUserId(Long userId) {
+    }
+
+    public void setIncomeId(Long incomeId) {
+    }
+
+    public Long getUserId() {
+        return user.getUserid();
+    }
+
+    public Long getIncomeId() {
+        return income.getId();
+    }
+
+
 }

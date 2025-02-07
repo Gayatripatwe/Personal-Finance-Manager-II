@@ -1,7 +1,6 @@
 package com.example.Personal.Finance.Management.entity;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
 @Entity
@@ -9,17 +8,34 @@ import java.time.LocalDate;
 public class Income {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id ;
+    private Long id;
+
     @Column
     private Double amount;
+
     @Column
     private String description;
+
     @Column
     private LocalDate date;
-    @ManyToOne()
+
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    // Constructors
+    public Income() {
+    }
+
+    public Income(Long id, Double amount, String description, LocalDate date, User user) {
+        this.id = id;
+        this.amount = amount;
+        this.description = description;
+        this.date = date;
+        this.user = user;
+    }
+
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -59,17 +75,4 @@ public class Income {
     public void setUser(User user) {
         this.user = user;
     }
-
-    public Income(Long id, Double amount, String description, LocalDate date, User user) {
-        this.id = id;
-        this.amount = amount;
-        this.description = description;
-        this.date = date;
-        this.user = user;
-    }
-
-    public Income() {
-
-    }
-
 }

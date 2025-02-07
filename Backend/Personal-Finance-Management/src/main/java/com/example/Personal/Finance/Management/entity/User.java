@@ -58,4 +58,7 @@ private String name;
 
     }
 
+    public Long getId() {
+        return user_id;
+    }
 }
