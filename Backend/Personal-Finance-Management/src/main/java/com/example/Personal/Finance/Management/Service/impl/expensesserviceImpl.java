@@ -3,11 +3,9 @@ package com.example.Personal.Finance.Management.Service.impl;
 import com.example.Personal.Finance.Management.Repository.expensesRepository;
 import com.example.Personal.Finance.Management.Service.expensesService;
 import com.example.Personal.Finance.Management.entity.Expenses;
-import com.example.Personal.Finance.Management.entity.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Optional;
 
@@ -34,7 +32,7 @@ public class expensesserviceImpl implements expensesService {
         }
         Expenses E = existingExp.get();
         E.setAmount(updatedExp.getAmount());
-        E.setDiscription(updatedExp.getDiscription());
+        E.setDescription(updatedExp.getDescription());
         E.setDate(updatedExp.getDate());
         E.setCategory(updatedExp.getCategory());
 

@@ -1,3 +1,4 @@
+
 package com.example.Personal.Finance.Management.entity;
 
 import com.example.Personal.Finance.Management.Enum.Category;
@@ -6,83 +7,66 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name ="Expenses")
+@Table(name = "Expenses")
 public class Expenses {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id ;
-    @Column
-    private String discription;
-    @Column
+    private Long id;
+
+    @Column(nullable = false)
+    private String description;
+
+    @Column(nullable = false)
     private Double amount;
-    @ManyToOne()                               // Assuming 'user' is a reference to the User entity
-    @JoinColumn(name = "user_id")
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
-    @Column
-    private LocalDate date ;
-@Column
+
+    @Column(nullable = false)
+    private LocalDate date;
+
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Category category;
 
-    public Long getId() {
-        return id;
-    }
+    @ManyToOne
+    @JoinColumn(name = "budget_id", nullable = false)
+    private Budget budget;
 
-    public void setId(Long id) {
+    // Constructors
+    public Expenses() {}
+
+    public Expenses(Long id, String description, Double amount, User user, LocalDate date, Category category, Budget budget) {
         this.id = id;
-    }
-
-    public String getDiscription() {
-        return discription;
-    }
-
-    public void setDiscription(String discription) {
-        this.discription = discription;
-    }
-
-    public Double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public Expenses(Long id, String discription, Double amount, User user, LocalDate date, Category category) {
-        this.id = id;
-        this.discription = discription;
+        this.description = description;
         this.amount = amount;
         this.user = user;
         this.date = date;
         this.category = category;
-    }
-    public Expenses() {
-
+        this.budget = budget;
     }
 
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+
+    public Double getAmount() { return amount; }
+    public void setAmount(Double amount) { this.amount = amount; }
+
+    public LocalDate getDate() { return date; }
+    public void setDate(LocalDate date) { this.date = date; }
+
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
+
+    public Category getCategory() { return category; }
+    public void setCategory(Category category) { this.category = category; }
+
+    public Budget getBudget() { return budget; }
+    public void setBudget(Budget budget) { this.budget = budget; }
 }
