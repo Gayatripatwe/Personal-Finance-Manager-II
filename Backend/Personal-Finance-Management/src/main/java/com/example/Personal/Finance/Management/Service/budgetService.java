@@ -1,11 +1,16 @@
 package com.example.Personal.Finance.Management.Service;
 
+import com.example.Personal.Finance.Management.DTO.BudgetDto;
 import com.example.Personal.Finance.Management.entity.Budget;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface budgetService {
-    ResponseEntity<Budget> addBudget(Budget newBudget);
-    ResponseEntity<Budget> updateBudget(Long id,Budget updatedbudget);
-    ResponseEntity<Budget> getBudgetById(Long id);
+    Budget addBudget(BudgetDto budgetDto);
+    Budget updateBudget(Long id, BudgetDto updatedBudgetDto);
+    Budget getBudgetById(Long id);
     ResponseEntity<Void> deleteBudget(Long id);
+//    List<Budget> getBudgetsByUserId(Long user_id);
+
 }
