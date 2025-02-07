@@ -26,6 +26,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/auth/income/**")).authenticated()
+                        .requestMatchers(new AntPathRequestMatcher("/auth/expenses/**")).authenticated()
+                        .requestMatchers(new AntPathRequestMatcher("/auth/Budget/**")).authenticated()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

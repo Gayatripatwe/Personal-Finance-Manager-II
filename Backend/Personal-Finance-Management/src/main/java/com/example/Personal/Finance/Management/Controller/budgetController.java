@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/Budget")
+@RequestMapping("/auth/Budget")
 public class budgetController {
     private final budgetService Budgetservice;
 

@@ -8,7 +8,7 @@ import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/expenses")
+@RequestMapping("/auth/expenses")
 public class expensesController {
     private final expensesService ExpenseService;
 
