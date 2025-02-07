@@ -47,11 +47,11 @@ private String name;
         this.password = password;
     }
 
-    public User(long user_id,String  Name , String email, String password) {
+    public User(long user_id,String  name , String email, String password) {
         this.user_id = user_id;
         this.email = email;
         this.password = password;
-        this.name= Name;
+        this.name= name;
     }
 
     public User() {
