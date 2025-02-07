@@ -3,59 +3,41 @@ package com.example.Personal.Finance.Management.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="User")
+@Table(name = "users")
 public class User {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private long user_id;
-@Column
-private String name;
-@Column
-    private String email  ;
-@Column
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, unique = true)
+    private Long id;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
     private String password;
 
-    public String getName() {
-        return name;
-    }
+    // ✅ Constructors, Getters, and Setters
+    public User() {}
 
-    public void setName(String name) {
+    public User(Long id, String name, String email, String password) {
+        this.id = id;
         this.name = name;
-    }
-
-    public long getUserid() {
-        return user_id;
-    }
-
-    public void setUserid(long user_id) {
-        this.user_id = user_id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public User(long user_id,String  Name , String email, String password) {
-        this.user_id = user_id;
         this.email = email;
         this.password = password;
-        this.name= Name;
     }
 
-    public User() {
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 }

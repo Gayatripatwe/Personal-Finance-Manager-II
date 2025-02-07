@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -23,14 +24,18 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http, UserDetailsService userDetailsService) throws Exception {
         return http
                 .csrf(csrf -> csrf.disable())
+                .addFilterBefore(new RequestLoggingFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
+
                         .requestMatchers(new AntPathRequestMatcher("/auth/income/**")).authenticated()
+                        .requestMatchers(new AntPathRequestMatcher("/auth/notifications/**")).authenticated()
+                        .requestMatchers(new AntPathRequestMatcher("/auth/saving-goals/**")).authenticated()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .userDetailsService(userDetailsService)  // Add this line
-                .httpBasic(withDefaults())  // Enable Basic Auth
+                .userDetailsService(userDetailsService)
+                .httpBasic(withDefaults())
                 .build();
     }
 

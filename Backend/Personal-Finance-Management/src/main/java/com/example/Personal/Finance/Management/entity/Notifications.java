@@ -1,5 +1,6 @@
 package com.example.Personal.Finance.Management.entity;
 
+import com.example.Personal.Finance.Management.Enum.NotificationType;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,11 +9,28 @@ public class Notifications {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
+
     @Column
-    private String MessageText;
+    private String messageText;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Enumerated(EnumType.STRING)
+    private NotificationType notificationType;
+
+    @Column(nullable = false)
+    private boolean isRead = false;
+
+    public Notifications(Long id, String messageText, User user) {
+        this.id = id;
+        this.messageText = messageText;
+        this.user = user;
+    }
+
+    public Notifications() {
+
+    }
 
     public Long getId() {
         return id;
@@ -23,11 +41,11 @@ public class Notifications {
     }
 
     public String getMessageText() {
-        return MessageText;
+        return messageText;
     }
 
     public void setMessageText(String messageText) {
-        MessageText = messageText;
+        this.messageText = messageText;
     }
 
     public User getUser() {
@@ -38,14 +56,17 @@ public class Notifications {
         this.user = user;
     }
 
-    public Notifications(Long id, String messageText, User user) {
-        this.id = id;
-        MessageText = messageText;
+    public void setRead(boolean b) {
+    }
+
+    public Notifications(NotificationType notificationType, boolean isRead) {
+        this.notificationType = notificationType;
+        this.isRead = isRead;
+    }
+
+    public Notifications(User user, String messageText, NotificationType notificationType) {
         this.user = user;
+        this.messageText = messageText;
+        this.notificationType = notificationType;
     }
-    public Notifications() {
-
-    }
-
-
 }

@@ -1,18 +1,23 @@
 package com.example.Personal.Finance.Management.Service.impl;
 
 import com.example.Personal.Finance.Management.Repository.SavingGoalsRepository;
+import com.example.Personal.Finance.Management.Repository.UserRepository;
 import com.example.Personal.Finance.Management.Service.SavingGoalsService;
 import com.example.Personal.Finance.Management.entity.SavingGoals;
+import com.example.Personal.Finance.Management.entity.User;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class SavingGoalsServiceimpl implements SavingGoalsService {
     private final SavingGoalsRepository savingGoalsRepository;
+    private final UserRepository userRepository;
 
-
-    public SavingGoalsServiceimpl(SavingGoalsRepository savingGoalsRepository) {
+    public SavingGoalsServiceimpl(SavingGoalsRepository savingGoalsRepository, UserRepository userRepository) {
         this.savingGoalsRepository = savingGoalsRepository;
+        this.userRepository = userRepository;
     }
 
     public List<SavingGoals> getAllSavingGoals() {
@@ -24,15 +29,16 @@ public class SavingGoalsServiceimpl implements SavingGoalsService {
     }
 
     public List<SavingGoals> getSavingGoalsByUserId(Long userId) {
-        return savingGoalsRepository.findByUser_UserId(userId);
+        return savingGoalsRepository.findByUser_Id(userId);
     }
 
     public SavingGoals createSavingGoal(SavingGoals savingGoals) {
+        Long userId = savingGoals.getUser().getId();
+        User fullUser = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with id " + userId));
+        savingGoals.setUser(fullUser);
         return savingGoalsRepository.save(savingGoals);
     }
-
-
-
     @Override
     public SavingGoals updateSavingGoal(Long id, SavingGoals updatedGoal) {
         Optional<SavingGoals> optionalGoal = savingGoalsRepository.findById(id);
@@ -49,9 +55,6 @@ public class SavingGoalsServiceimpl implements SavingGoalsService {
 
         return savingGoalsRepository.save(goal);
     }
-
-
-
 
     public void deleteSavingGoal(Long id) {
         savingGoalsRepository.deleteById(id);

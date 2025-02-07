@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/saving-goals")
+@RequestMapping("/auth/saving-goals")
 public class SavingGoalsController {
     private final SavingGoalsService savingGoalsService;
 
@@ -18,14 +18,12 @@ public class SavingGoalsController {
         this.savingGoalsService = savingGoalsService;
     }
 
-
     @GetMapping
     public ResponseEntity<List<SavingGoals>> getAllSavingGoals() {
         List<SavingGoals> savingGoals = savingGoalsService.getAllSavingGoals();
         return ResponseEntity.ok(savingGoals);
     }
 
-    // Get saving goal by ID
     @GetMapping("/{id}")
     public ResponseEntity<SavingGoals> getSavingGoalById(@PathVariable Long id) {
         Optional<SavingGoals> savingGoal = savingGoalsService.getSavingGoalById(id);
@@ -33,21 +31,18 @@ public class SavingGoalsController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Get saving goals by User ID
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<SavingGoals>> getSavingGoalsByUserId(@PathVariable Long userId) {
         List<SavingGoals> savingGoals = savingGoalsService.getSavingGoalsByUserId(userId);
         return ResponseEntity.ok(savingGoals);
     }
 
-    // Create a new saving goal
     @PostMapping
     public ResponseEntity<SavingGoals> createSavingGoal(@RequestBody SavingGoals savingGoals) {
         SavingGoals createdGoal = savingGoalsService.createSavingGoal(savingGoals);
         return ResponseEntity.ok(createdGoal);
     }
 
-    // Update an existing saving goal
     @PutMapping("/{id}")
     public ResponseEntity<SavingGoals> updateSavingGoal(@PathVariable Long id, @RequestBody SavingGoals updatedGoal) {
         try {
@@ -58,7 +53,6 @@ public class SavingGoalsController {
         }
     }
 
-    // Delete a saving goal
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteSavingGoal(@PathVariable Long id) {
         savingGoalsService.deleteSavingGoal(id);

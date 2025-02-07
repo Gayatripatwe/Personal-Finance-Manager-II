@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+
 public interface SavingGoalsService {
      List<SavingGoals> getAllSavingGoals();
      Optional<SavingGoals> getSavingGoalById(Long id);
