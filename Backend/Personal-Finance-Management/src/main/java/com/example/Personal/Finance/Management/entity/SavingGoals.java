@@ -6,6 +6,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "SavingsGoal")
 public class SavingGoals {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -14,6 +15,7 @@ public class SavingGoals {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @Column(nullable = false)
     private String goalName;
 
     @Column(nullable = false)
@@ -25,18 +27,25 @@ public class SavingGoals {
     @Column(nullable = false)
     private LocalDate deadline;
 
+    @ManyToOne
+    @JoinColumn(name = "income_id", nullable = false)
+    private Income income;  // Added from other branch
 
+    // Default Constructor
     public SavingGoals() {}
 
-    public SavingGoals(Long id, User user, String goalName, Double targetAmount, Double currentAmount, LocalDate deadline) {
+    // Constructor with parameters (including income)
+    public SavingGoals(Long id, User user, String goalName, Double targetAmount, Double currentAmount, LocalDate deadline, Income income) {
         this.id = id;
         this.user = user;
         this.goalName = goalName;
         this.targetAmount = targetAmount;
         this.currentAmount = currentAmount;
         this.deadline = deadline;
+        this.income = income;
     }
 
+    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -54,4 +63,7 @@ public class SavingGoals {
 
     public LocalDate getDeadline() { return deadline; }
     public void setDeadline(LocalDate deadline) { this.deadline = deadline; }
+
+    public Income getIncome() { return income; }
+    public void setIncome(Income income) { this.income = income; }
 }
