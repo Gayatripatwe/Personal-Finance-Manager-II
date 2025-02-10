@@ -1,4 +1,4 @@
-package com.example.Personal.Finance.Management.Controller;
+package com.example.Personal.Finance.Management.controller;
 
 import com.example.Personal.Finance.Management.Service.NotificationsService;
 import com.example.Personal.Finance.Management.entity.Notifications;
