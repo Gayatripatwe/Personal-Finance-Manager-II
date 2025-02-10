@@ -31,8 +31,8 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .userDetailsService(userDetailsService)  // Add this line
-                .httpBasic(withDefaults())  // Enable Basic Auth
+                .userDetailsService(userDetailsService)
+                .httpBasic(withDefaults())
                 .build();
     }
 
