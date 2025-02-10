@@ -6,8 +6,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LandingPage.css'; 
 
-import CustomNavbar from './Components/NavBar';  // Import Navbar Component
-import LoginForm from '../Pages/LoginForm';  // Import Login Component
+import CustomNavbar from './Components/NavBar'; 
+import LoginForm from '../Pages/LoginForm'; 
 
 function LandingPage() {
   const [showModal, setShowModal] = useState(false);
@@ -17,7 +17,6 @@ function LandingPage() {
     <>
       <CustomNavbar onLoginClick={() => setShowModal(true)} />
 
-      {/* Main Content with Image on Right */}
       <div className="container main-container">
         <div className="text-content">
           <h1>How Will You Spend Your <span className="money-text">MONEY</span>, Life?</h1>
@@ -28,7 +27,6 @@ function LandingPage() {
         </div>
       </div>
 
-      {/* Login Modal */}
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>
         <Modal.Header closeButton>
           <Modal.Title>Login</Modal.Title>
@@ -38,7 +36,6 @@ function LandingPage() {
         </Modal.Body>
       </Modal>
 
-      {/*Footer Section */}
       <Footer />
     </>
   );
