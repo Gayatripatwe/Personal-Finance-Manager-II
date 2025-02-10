@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "SavingsGoal")
+@Table(name = "savings_goal")
 public class SavingGoals {
 
     @Id
@@ -22,20 +22,17 @@ public class SavingGoals {
     private Double targetAmount;
 
     @Column(nullable = false)
-    private Double currentAmount;
+    private Double currentAmount = 0.0; // Default 0.0
 
     @Column(nullable = false)
     private LocalDate deadline;
 
-    @ManyToOne
-    @JoinColumn(name = "income_id", nullable = false)
-    private Income income;  // Added from other branch
+    @Column(nullable = false)
+    private Double income; // User's income limit
 
-    // Default Constructor
     public SavingGoals() {}
 
-    // Constructor with parameters (including income)
-    public SavingGoals(Long id, User user, String goalName, Double targetAmount, Double currentAmount, LocalDate deadline, Income income) {
+    public SavingGoals(Long id, User user, String goalName, Double targetAmount, Double currentAmount, LocalDate deadline, Double income) {
         this.id = id;
         this.user = user;
         this.goalName = goalName;
@@ -45,7 +42,7 @@ public class SavingGoals {
         this.income = income;
     }
 
-    // Getters and Setters
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -64,6 +61,6 @@ public class SavingGoals {
     public LocalDate getDeadline() { return deadline; }
     public void setDeadline(LocalDate deadline) { this.deadline = deadline; }
 
-    public Income getIncome() { return income; }
-    public void setIncome(Income income) { this.income = income; }
+    public Double getIncome() { return income; }
+    public void setIncome(Double income) { this.income = income; }
 }

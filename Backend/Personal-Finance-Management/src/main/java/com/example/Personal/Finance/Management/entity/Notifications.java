@@ -8,12 +8,13 @@ import jakarta.persistence.*;
 public class Notifications {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
+    private Long id;
 
     @Column
     private String messageText;
+
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false) // ✅ Ensure correct mapping
     private User user;
 
     @Enumerated(EnumType.STRING)
@@ -28,36 +29,18 @@ public class Notifications {
         this.user = user;
     }
 
-    public Notifications() {
+    public Notifications() {}
 
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getId() {
-        return id;
-    }
+    public String getMessageText() { return messageText; }
+    public void setMessageText(String messageText) { this.messageText = messageText; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 
-    public String getMessageText() {
-        return messageText;
-    }
-
-    public void setMessageText(String messageText) {
-        this.messageText = messageText;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setRead(boolean b) {
-    }
+    public void setRead(boolean isRead) { this.isRead = isRead; }
 
     public Notifications(NotificationType notificationType, boolean isRead) {
         this.notificationType = notificationType;
