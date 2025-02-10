@@ -1,12 +1,12 @@
-
 package com.example.Personal.Finance.Management.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "SavingsGoal")
+@Table(name = "savings_goal")
 public class SavingGoals {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,74 +22,17 @@ public class SavingGoals {
     private Double targetAmount;
 
     @Column(nullable = false)
-    private Double currentAmount;
+    private Double currentAmount = 0.0; // Default 0.0
 
     @Column(nullable = false)
     private LocalDate deadline;
 
-    @ManyToOne
-    @JoinColumn(name = "income_id", nullable = false)
-    private Income income;
+    @Column(nullable = false)
+    private Double income; // User's income limit
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    }
+    public SavingGoals() {}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Income getIncome() {
-        return income;
-    }
-
-    public void setIncome(Income income) {
-        this.income = income;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getGoalName() {
-        return goalName;
-    }
-
-    public void setGoalName(String goalName) {
-        this.goalName = goalName;
-    }
-
-    public Double getTargetAmount() {
-        return targetAmount;
-    }
-
-    public void setTargetAmount(Double targetAmount) {
-        this.targetAmount = targetAmount;
-    }
-
-    public Double getCurrentAmount() {
-        return currentAmount;
-    }
-
-    public void setCurrentAmount(Double currentAmount) {
-        this.currentAmount = currentAmount;
-    }
-
-    public LocalDate getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(LocalDate deadline) {
-        this.deadline = deadline;
-    }
-
-    // Constructor with parameters
-    public SavingGoals(Long id, User user, String goalName, Double targetAmount, Double currentAmount, LocalDate deadline, Income income) {
+    public SavingGoals(Long id, User user, String goalName, Double targetAmount, Double currentAmount, LocalDate deadline, Double income) {
         this.id = id;
         this.user = user;
         this.goalName = goalName;
@@ -99,8 +42,25 @@ public class SavingGoals {
         this.income = income;
     }
 
-    // Default constructor
-    public SavingGoals() {
-    }
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
+
+    public String getGoalName() { return goalName; }
+    public void setGoalName(String goalName) { this.goalName = goalName; }
+
+    public Double getTargetAmount() { return targetAmount; }
+    public void setTargetAmount(Double targetAmount) { this.targetAmount = targetAmount; }
+
+    public Double getCurrentAmount() { return currentAmount; }
+    public void setCurrentAmount(Double currentAmount) { this.currentAmount = currentAmount; }
+
+    public LocalDate getDeadline() { return deadline; }
+    public void setDeadline(LocalDate deadline) { this.deadline = deadline; }
+
+    public Double getIncome() { return income; }
+    public void setIncome(Double income) { this.income = income; }
 }
-

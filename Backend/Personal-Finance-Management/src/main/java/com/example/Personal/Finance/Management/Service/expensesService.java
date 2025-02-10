@@ -14,4 +14,5 @@ public interface expensesService {
      List<ExpensesDto> getExpensesByUserId(Long userId);
      void deleteExpenseById(Long id);
      ResponseEntity<ExpensesDto> updateExpense(Long id, ExpensesDto updatedExpenseDto);
+
 }

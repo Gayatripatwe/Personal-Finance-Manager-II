@@ -5,10 +5,11 @@ import jakarta.persistence.*;
 @Entity
 @Table(name="User")
 public class User {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private long user_id;
-@Column
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
+    private long userId;
+    @Column
 private String name;
 @Column
     private String email  ;
@@ -24,11 +25,11 @@ private String name;
     }
 
     public long getUserid() {
-        return user_id;
+        return userId;
     }
 
-    public void setUserid(long user_id) {
-        this.user_id = user_id;
+    public void setUserid(long userId) {
+        this.userId = userId;
     }
 
     public String getEmail() {
@@ -47,18 +48,15 @@ private String name;
         this.password = password;
     }
 
-    public User(long user_id,String  name , String email, String password) {
-        this.user_id = user_id;
+    public User(long user_id,String  Name , String email, String password) {
+        this.userId = user_id;
         this.email = email;
         this.password = password;
-        this.name= name;
+        this.name= Name;
     }
 
     public User() {
 
     }
 
-    public Long getId() {
-        return user_id;
-    }
 }

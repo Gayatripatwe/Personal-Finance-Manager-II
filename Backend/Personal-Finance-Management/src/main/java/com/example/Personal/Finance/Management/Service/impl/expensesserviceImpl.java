@@ -1,4 +1,3 @@
-
 package com.example.Personal.Finance.Management.Service.impl;
 
 import com.example.Personal.Finance.Management.DTO.ExpensesDto;
@@ -55,7 +54,7 @@ public class expensesserviceImpl implements expensesService {
         expense.setUser(user);
         expense.setBudget(budget);
 
-        // **Set date (default to current date if not provided)**
+        // *Set date (default to current date if not provided)*
         if (expenseDto.getDate() == null) {
             expense.setDate(LocalDate.now());
         } else {
@@ -77,7 +76,7 @@ public class expensesserviceImpl implements expensesService {
 
     @Override
     public List<ExpensesDto> getExpensesByUserId(Long userId) {
-        List<Expenses> expenses = ExpensesRepository.findByUserId(userId);
+        List<Expenses> expenses = ExpensesRepository.findByUser_UserId(userId);
         return expenses.stream().map(this::mapEntityToDto).collect(Collectors.toList());
     }
 
@@ -117,20 +116,14 @@ public class expensesserviceImpl implements expensesService {
         dto.setAmount(expense.getAmount());
         dto.setDescription(expense.getDescription());
         dto.setCategory(expense.getCategory());
-        dto.setUser_id(expense.getUser().getId());
+        dto.setUser_id(expense.getUser().getUserid());
         dto.setBudget_id(expense.getBudget().getId()); // Corrected this line
 
         return dto;
-    }
+     }
 
 
 
 
 
 }
-
-
-
-
-
-
