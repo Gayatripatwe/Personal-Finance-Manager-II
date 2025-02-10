@@ -1,0 +1,50 @@
+.month-picker {
+    width: 250px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .year-selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    color: #2c3e50;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .arrow {
+    cursor: pointer;
+    color: #007bff;
+    font-size: 18px;
+  }
+  
+  .months-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  
+  .month {
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #f1f1f1;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .month:hover {
+    background: #d6d6d6;
+  }
+  
+  .selected {
+    background: #3b82f6;
+    color: white;
+  }
+  
