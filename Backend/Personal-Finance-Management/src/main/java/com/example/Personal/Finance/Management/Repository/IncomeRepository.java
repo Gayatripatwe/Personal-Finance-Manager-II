@@ -15,4 +15,8 @@ public interface IncomeRepository extends JpaRepository<Income, Long> {
     List<Income> findByUser(User user);
     @Query("SELECT SUM(i.amount) FROM Income i WHERE i.user = :user")
     Optional<Double> sumByUser(@Param("user") User user);
+    @Query("SELECT i FROM Income i WHERE i.user.id = :userId ORDER BY i.id ASC LIMIT 1")
+    Optional<Income> findFirstByUserId(@Param("userId") Long userId);
+    @Query("SELECT SUM(i.amount) FROM Income i WHERE i.user.userid = :userId")
+    Double getTotalIncomeByUserId(@Param("userId") Long userId);
 }

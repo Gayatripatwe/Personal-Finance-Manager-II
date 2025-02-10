@@ -1,5 +1,6 @@
 package com.example.Personal.Finance.Management.Service.impl;
 import com.example.Personal.Finance.Management.DTO.BudgetDto;
+import com.example.Personal.Finance.Management.DTO.BudgetResponseDto;
 import com.example.Personal.Finance.Management.Repository.IncomeRepository;
 import com.example.Personal.Finance.Management.Repository.UserRepository;
 import com.example.Personal.Finance.Management.Repository.budgetRepository;
@@ -14,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class budgetServiceImpl implements budgetService {
@@ -27,6 +29,7 @@ public class budgetServiceImpl implements budgetService {
         this.incomeRepository = incomeRepository;
     }
 
+//Add budget with income id
     @Override
     public Budget addBudget(BudgetDto budgetDto) {
         User user = userRepository.findById(budgetDto.getUser_id())
@@ -48,7 +51,7 @@ public class budgetServiceImpl implements budgetService {
         return budgetRepository.save(budget);
     }
 
-
+//update budget by userid
     @Override
     public Budget updateBudget(Long id, BudgetDto updatedBudgetDto) {
         return budgetRepository.findById(id)
@@ -64,13 +67,14 @@ public class budgetServiceImpl implements budgetService {
     }
 
 
-
+//get budget by  userid
     @Override
     public Budget getBudgetById(Long id) {
         return budgetRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Budget not found"));
     }
 
+//    delete budget by userid
 @Override
     public ResponseEntity<Void> deleteBudget(Long id){
         Optional<Budget> existingBudget= budgetRepository.findById(id);
@@ -81,10 +85,56 @@ public class budgetServiceImpl implements budgetService {
     return ResponseEntity.noContent().build();
 }
 
-//    @Override
-//    public List<Budget> getBudgetsByUserId(Long UserId) {
-//        return budgetRepository.findById(UserId);
-//    }
+//addbudget by userid withour incomeid
+@Override
+public BudgetResponseDto addBudgetbyuserid(BudgetDto budgetDto) {
+    // Find user
+    User user = userRepository.findById(budgetDto.getUser_id())
+            .orElseThrow(() -> new RuntimeException("User not found"));
+
+    // Calculate total income of the user
+    Double totalIncome = incomeRepository.getTotalIncomeByUserId(budgetDto.getUser_id());
+    if (totalIncome == null) {
+        totalIncome = 0.0; // Default to 0 if user has no income records
+    }
+
+    // Validate budget amount
+    if (budgetDto.getAmount() > totalIncome) {
+        throw new RuntimeException("Budget amount cannot be greater than total available income.");
+    }
+
+    // Find any existing income (since Budget has a Many-to-One relationship with Income)
+    Income income = incomeRepository.findFirstByUserId(budgetDto.getUser_id())
+            .orElse(null); // Set to null if no income exists
+
+    // Create and save budget
+    Budget budget = new Budget();
+    budget.setAmount(budgetDto.getAmount());
+    budget.setUser(user);
+    budget.setCategory(budgetDto.getCategory());
+    budget.setIncome(income); // Ensure this is explicitly set (can be null)
+
+    Budget savedBudget = budgetRepository.save(budget);
+
+    // Return only the required fields in the response
+    return new BudgetResponseDto(savedBudget.getId(), savedBudget.getAmount(), savedBudget.getCategory(), user.getUserid());
+}
+
+    @Override
+    public List<BudgetResponseDto> getBudgetsByUserId(Long userId) {
+        List<Budget> budgets = budgetRepository.findByUserId(userId);
+
+        return budgets.stream()
+                .map(budget -> new BudgetResponseDto(
+                        budget.getId(),
+                        budget.getAmount(),
+                        budget.getCategory(),
+                        budget.getUser().getUserid()
+                ))
+                .collect(Collectors.toList());
+    }
+
+
 
 
 

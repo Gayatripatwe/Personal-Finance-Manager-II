@@ -27,7 +27,7 @@ public class Budget {
     private Category category;
 
     @ManyToOne
-    @JoinColumn(name = "income_id", nullable = false)
+    @JoinColumn(name = "income_id", nullable = true)
     @JsonBackReference
     private Income income;
 

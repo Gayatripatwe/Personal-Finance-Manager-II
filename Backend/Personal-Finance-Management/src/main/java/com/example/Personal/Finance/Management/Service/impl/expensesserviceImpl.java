@@ -122,6 +122,8 @@ public class expensesserviceImpl implements expensesService {
         return dto;
      }
 
+//     getall  expenses by userid
+
 
 
 

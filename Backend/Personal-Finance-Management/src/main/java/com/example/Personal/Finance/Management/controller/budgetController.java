@@ -1,6 +1,7 @@
 package com.example.Personal.Finance.Management.controller;
 
 import com.example.Personal.Finance.Management.DTO.BudgetDto;
+import com.example.Personal.Finance.Management.DTO.BudgetResponseDto;
 import com.example.Personal.Finance.Management.Service.budgetService;
 import com.example.Personal.Finance.Management.entity.Budget;
 import com.example.Personal.Finance.Management.entity.Expenses;
@@ -57,22 +58,32 @@ public class budgetController {
         }
     }
 
-//    // Get Budgets by User ID
-//    @GetMapping("/user/{user_id}")
-//    public ResponseEntity<?> getBudgetsByUserId(@PathVariable Long user_id) {
-//        try {
-//            List<Budget> budgets = Budgetservice.getBudgetsByUserId(user_id);
-//            return ResponseEntity.ok(budgets);
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-//        }
-//    }
 
    @DeleteMapping("/deletebudget/{id}")
     public  ResponseEntity<Void> deleteBudget(@PathVariable Long id){
        return Budgetservice.deleteBudget(id);
    }
 
-   //get all budget of one user
+   //add budget  by userid without income id
+   @PostMapping("/addbyuserid")
+   public ResponseEntity<?> addBudgetbyuserid(@RequestBody BudgetDto budgetDto) {
+       try {
+           BudgetResponseDto budgetResponse = Budgetservice.addBudgetbyuserid(budgetDto);
+           return ResponseEntity.ok(budgetResponse);
+       } catch (RuntimeException e) {
+           return ResponseEntity.badRequest().body(e.getMessage());
+       } catch (Exception e) {
+           e.printStackTrace();
+           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+       }
+   }
+
+    //get all budget of one user
+    // Get All Budgets by User ID
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<BudgetResponseDto>> getBudgetsByUserId(@PathVariable Long userId) {
+        List<BudgetResponseDto> budgets = Budgetservice.getBudgetsByUserId(userId);
+        return ResponseEntity.ok(budgets);
+    }
 
 }
