@@ -12,6 +12,7 @@
     left: 0;
     top: 0;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: width 0.3s ease-in-out;
   }
   
   .sidebar h2 {
@@ -54,8 +55,8 @@
   }
   
   /* Main Content should shift when Sidebar is present */
-  .main-content {
-    margin-left: 250px; /* Sidebar Width */
+  /* .main-content {
+    margin-left: 250px;
     padding: 20px;
     width: calc(100% - 250px);
     min-height: 100vh;
@@ -63,7 +64,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-  }
+  } */
   
   /* Responsive Design */
   @media (max-width: 768px) {
@@ -101,3 +102,33 @@
     }
   }
   
+  /* Shrink Sidebar when Screen is Small */
+@media (max-width: 768px) {
+  .sidebar {
+      width: 80px; /* Shrunk version */
+      padding: 10px;
+      align-items: center;
+  }
+
+  .sidebar h2, .sidebar p, .sidebar a {
+      display: none; /* Hide text when shrunk */
+  }
+}
+
+/* Fully Collapsed Sidebar on Small Screens */
+@media (max-width: 576px) {
+  .sidebar {
+      width: 60px;
+  }
+}
+
+/* Expand Sidebar on Hover */
+.sidebar:hover {
+  width: 250px; /* Expand back */
+}
+
+.sidebar:hover h2, 
+.sidebar:hover p, 
+.sidebar:hover a {
+  display: block; /* Show text when hovered */
+}

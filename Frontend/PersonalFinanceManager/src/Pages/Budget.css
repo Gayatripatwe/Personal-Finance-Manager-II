@@ -1,71 +1,3 @@
-/* .budget-container {
-    padding: 20px;
-    background-color: #f8f9fa;
-    height: 100vh;
-    width: calc(100vw - 250px);
-    margin-left: 250px;
-  }
-  
-  .filters {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .budget-main {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    height: calc(100vh - 60px);
-  }
-  
-  .left-section {
-    width: 20%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .right-section {
-    width: 75%;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  
-  .assigned-list {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-  }
-  
-  .section {
-    background: #f1f1f1;
-    padding: 15px;
-    border-radius: 8px;
-    width: 48%;
-  }
-  
-  .section h4 {
-    text-align: center;
-  }
-  
-  .section ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .section ul li {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
-  }
-   */
-
-
-
-
    /* Budget Page Container */
 .budget-container {
     padding: 20px;
@@ -73,16 +5,24 @@
     height: 100vh;
     width: calc(100vw - 250px);
     margin-left: 250px;
+    transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
 }
 
-/* Budget Controls (Calendar, Total Budget, Add Budget) */
+
 .budget-controls {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between; /* Aligns elements to left & right */
     align-items: center;
-    gap: 20px;
     margin-bottom: 20px;
+    padding: 0 20px; /* Adjust spacing if needed */
 }
+
+.budget-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
 
 /* Calendar Selection */
 .calendar-container {
@@ -136,17 +76,19 @@
 /* Assigned Budget List */
 .budget-main {
     display: flex;
-    justify-content: center; /* Centering Assigned Budget */
+    justify-content: center; 
     align-items: center;
     height: calc(100vh - 120px);
 }
 
 .assigned-budget {
     width: 60%;
+    max-height: 400px;
     background: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Enables scrolling when content exceeds 400px */
 }
 
 .assigned-list {
@@ -155,26 +97,78 @@
     gap: 20px;
 }
 
-.section {
-    background: #f1f1f1;
-    padding: 15px;
-    border-radius: 8px;
-    width: 48%;
+
+/* Improved Budget Table Styling */
+.budget-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.section h4 {
+.budget-table thead {
+    background-color:#194a7a;
+    color: white;
     text-align: center;
 }
 
-.section ul {
+.budget-table th, .budget-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+/* Table Container inside assigned-budget */
+.table-container {
+    max-height: 350px; /* Slightly smaller to fit inside assigned-budget */
+    overflow-y: auto; /* Enables vertical scrolling for long tables */
+}
+
+.budget-table thead {
+    position: sticky;
+    top: 0;
+    background-color: #194a7a;
+    color: white;
+    z-index: 10;
+}
+.budget-table tbody tr:hover {
+    background-color: #f1f1f1;
+    transition: 0.3s;
+}
+
+/* Centering pagination */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.pagination-container .pagination {
+    display: flex;
+    gap: 8px;
     list-style: none;
     padding: 0;
 }
 
-.section ul li {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
+.pagination-container .pagination li {
+    background-color:#194a7a;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
 }
+
+.pagination-container .pagination li:hover {
+    background-color: #0056b3;
+}
+
+.pagination-container .pagination .active {
+    background-color: #0056b3;
+    font-weight: bold;
+}
+
 
 /* Calendar Dropdown */
 .calendar-dropdown {
@@ -189,16 +183,16 @@
     gap: 8px;
     font-size: 16px;
     padding: 10px 15px;
-    border: 1px solid #007bff;
+    border: 1px solid #194a7a;
     background-color: white;
-    color: #007bff;
+    color: #194a7a;
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
 
 .calendar-button:hover {
-    background-color: #007bff;
+    background-color: #194a7a;
     color: white;
 }
 
@@ -210,7 +204,7 @@
 /* Calendar Dropdown Content */
 .calendar-dropdown-content {
     position: absolute;
-    top: 110%; /* Places it below the button */
+    top: 110%; 
     left: 0;
     z-index: 1000;
     background: white;
@@ -223,4 +217,138 @@
 /* Hide dropdown when not visible */
 .calendar-dropdown-content.hidden {
     display: none;
+}
+
+/* Modal Custom Styles */
+.custom-modal .modal-content {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+/* Modal Header */
+.custom-modal .modal-header {
+    background-color: #194a7a;
+    color: white;
+    border-bottom: none;
+    padding: 15px 20px;
+}
+
+/* Close Button Styling */
+.custom-modal .modal-header .btn-close {
+    color: white;
+    opacity: 1;
+}
+
+/* Modal Title */
+.custom-modal .modal-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Modal Body */
+.custom-modal .modal-body {
+    padding: 20px;
+}
+
+/* Form Inputs */
+.custom-modal .form-control {
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ced4da;
+    transition: all 0.3s ease-in-out;
+}
+
+.custom-modal .form-control:focus {
+    border-color: #194a7a;
+    box-shadow: 0px 0px 8px rgba(1, 13, 25, 0.3);
+}
+
+/* Form Select Dropdown */
+.custom-modal .form-select {
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+/* Modal Footer */
+.custom-modal .modal-footer {
+    border-top: none;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Modal Buttons */
+.custom-modal .btn-primary {
+    background-color:#194a7a;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    transition: 0.3s;
+}
+
+.custom-modal .btn-primary:hover {
+    background-color: #194a7a;
+}
+
+.custom-modal .btn-secondary {
+    background-color: #6c757d;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    transition: 0.3s;
+}
+
+.custom-modal .btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+
+/* Default Sidebar Width */
+.sidebar {
+    width: 250px;
+    transition: width 0.3s ease-in-out;
+}
+
+/* Shrink Sidebar when Modal is Open */
+.modal-open .sidebar {
+    width: 80px;
+}
+
+/* Adjust Main Content when Sidebar Shrinks */
+.sidebar-shrink {
+    margin-left: 80px;
+    width: calc(100vw - 80px);
+    transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+    .custom-modal .modal-content {
+        width: 90%;
+        margin: auto;
+    }
+}
+
+
+/* Expand Content when Sidebar Shrinks */
+@media (max-width: 768px) {
+    .budget-container {
+        margin-left: 80px;
+        width: calc(100vw - 80px);
+    }
+}
+
+/* Expand Content on Very Small Screens */
+@media (max-width: 576px) {
+    .budget-container {
+        margin-left: 60px;
+        width: calc(100vw - 60px);
+    }
 }

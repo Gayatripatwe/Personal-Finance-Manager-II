@@ -1,28 +1,14 @@
-/* Ensure Navbar and Footer Colors Match */
+
 .navbar-dark {
   background-color: #212529 !important;
 }
 
-/* Ensure proper padding so content isn't hidden behind fixed navbar */
-/* body {
-  padding-top: 80px;
-} */
-
-/* Fix Alignment Issues */
-.main-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 80px 5%;
-}
-
-/* Ensure Navbar Text & Items Align Horizontally */
 .navbar-nav {
   display: flex;
   align-items: center;
 }
 
-/* Make sure Navbar stays fixed properly */
+
 .fixed-top {
   position: fixed;
   top: 0;
@@ -30,27 +16,27 @@
   z-index: 1030;
 }
 
-/* Light Blue Background */
+
 body {
     background-color: #dceefb;
     margin: 0;
   }
   
-  /* Container for text and image */
-  .main-container {
+ 
+.main-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 80px 5%;
   }
   
-  /* Text Content on Left */
+  
   .text-content {
     max-width: 50%;
     text-align: left;
   }
   
-  /* Custom Font for h1 */
+  
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
   
   h1 {
@@ -59,14 +45,14 @@ body {
     line-height: 1.1;
   }
   
-  /* Italic Style for h3 */
+  
   h3 {
     font-style: italic;
     font-size: 1.5em;
     color: #555;
   }
   
-  /* Money Text with Cut Line */
+  
   .money-text {
     display: inline-block;
     position: relative;
@@ -86,34 +72,35 @@ body {
     transform: rotate(-10deg);
   }
   
-  /* Image Content: Full Height & Positioned on Right */
+  
 .image-content {
   position: absolute;
   right: 0;
   top: 0;
-  height: 100vh; /* Full height of the viewport */
-  width: 50%; /* Adjust width as needed */
+  height: 100vh; 
+  width: 50%; 
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden; /* Ensures no overflow */
+  overflow: hidden; 
 }
 
-/* Ensure Image Fills the Full Height */
+
 .landing-image {
   width: 100%;
-  height: 100vh; /* Full height of viewport */
-  object-fit: cover; /* Ensures image maintains aspect ratio */
+  height: 100vh; 
+  object-fit: cover; 
 }
   
-  /* Footer Styling */
   .footer {
-    width: 100%;
-    background-color: #212529;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 70%;
+    background-color: #4d5c6c;
     color: white;
     text-align: center;
     padding: 5px 0;
-    position: relative;
     bottom: 0;
   }
   
